@@ -6,38 +6,44 @@ let btnLog = document.querySelector("#btnLog");
 
 
 btnLog.onclick = function(){
+
+    
    if (admin.value !="" && pass.value !="") {
-    //    let adminCheck = admin.value ;
-    //    let passCheck = pass.value ;
+       let adminCheck = admin.value ;
+       let passCheck = pass.value ;
 
-    //    let fd = new FormData();
-    //    fd.append("admin", adminCheck);
-    //    fd.append("password", passCheck);
+       let fd = new FormData();
+       fd.append("admin", adminCheck);
+       fd.append("password", passCheck);
 
-    //    let xml = new XMLHttpRequest();
-    //    xml.open("post", "php_pages/login.php");
-    //    xml.send(fd);
+       let xml = new XMLHttpRequest();
+       xml.open("post", "php_pages/login.php");
+       xml.send(fd);
 
-    //    xml.onreadystatechange = function(){
-    //        if (xml.readyState == 4 && xml.status == 200) {
-              
-    //          if (xml.responseText == true) {
-    //             login.style.display = "none" ;
-    //          } else {
-    //              alert("nesto je krenulo po zlu");
-    //          }
+       xml.onreadystatechange = function(){
+           if (xml.readyState == 4 && xml.status == 200) {
+
+            // console.log(JSON.parse(xml.responseText));
+            // console.log(xml.responseText);
+            
+
+             if (xml.responseText == true) {
+                login.style.display = "none" ;
+             } else {
+                 alert("nesto je krenulo po zlu");
+             }
             
 
                
-    //        } else {
-    //            alert("pogrsna lozinka ili korisncko ime");
-    //            admin.value = ""  ;
-    //            pass.value = "";
-    //        }
+           } else {
+               alert("pogrsna lozinka ili korisncko ime");
+               admin.value = ""  ;
+               pass.value = "";
+           }
 
-    //    }
+       }
        
-    console.log("test");
+   
     
 
 

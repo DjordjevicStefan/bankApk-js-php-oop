@@ -1,14 +1,14 @@
 <?php
 
-class Admin{
- private $admin ;
+class Admins{
+ public $admin ;
  private $pdo;
- private $password ;
+ public $password ;
 
- public function __construct($db,$admin,$password){
+ public function __construct($db){
     $this->pdo = $db;
-    $this->admin = $admin;
-    $this->password = $password;
+    // $this->admin = $admin;
+    // $this->password = $password;
  
    }
 
@@ -21,16 +21,22 @@ class Admin{
  $stmt->bindParam(1,$this->admin); 
  $stmt->bindParam(2,$this->password); 
  
- $stmt = $this->pdo->execute();
+ $stmt->execute();
 
- if ($stmt->execute()) {
-    return true ;
+ $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+ if ($result["admin"]== null) {
+  // echo "svasta nesto" ;
+  // printf("Error", $stmt->error);
+  return false ;
   } else {
-    printf("Error", $stmt->error);
-    return false ;
+    //  echo "psroslo" ;
+     return true ;
+    
   }
 
- }  
+ } 
 
 
 
