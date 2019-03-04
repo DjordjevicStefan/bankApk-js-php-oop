@@ -27,27 +27,20 @@ btnLog.onclick = function(){
             // console.log(xml.responseText);
             
 
-             if (xml.responseText == true) {
+             if (xml.responseText == "ok") {
                 login.style.display = "none" ;
-             } else {
-                 alert("nesto je krenulo po zlu");
+             } else if(xml.responseText == "try again") {
+                 alert("nesto je krenulo po zlu,proverite sifru i korisnicko ime i pokusajte ponovo");
+                 admin.value = ""  ;
+                 pass.value = "";
              }
             
 
                
-           } else {
-               alert("pogrsna lozinka ili korisncko ime");
-               admin.value = ""  ;
-               pass.value = "";
-           }
-
+           }  
        }
        
-   
-    
-
-
-   } else {
+     } else {
        alert("popunite oba polja");
    }
 

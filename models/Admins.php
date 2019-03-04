@@ -9,10 +9,7 @@ class Admins{
     $this->pdo = $db;
     // $this->admin = $admin;
     // $this->password = $password;
- 
-   }
-
-
+ }
  public function check(){
  $query = "SELECT * FROM admins WHERE admin=? AND password=?";
 
@@ -27,19 +24,14 @@ class Admins{
 
 
  if ($result["admin"]== null) {
-  // echo "svasta nesto" ;
+  echo "try again" ;
   // printf("Error", $stmt->error);
-  return false ;
+ 
   } else {
-    //  echo "psroslo" ;
-     return true ;
-    
-  }
+     echo "ok" ;
+    }
 
  } 
-
-
-
 
 }
 
