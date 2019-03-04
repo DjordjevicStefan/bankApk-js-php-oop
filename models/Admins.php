@@ -1,15 +1,19 @@
 <?php
 
 class Admins{
- public $admin ;
+ private $admin ;
  private $pdo;
- public $password ;
+ private $password ;
+ 
 
- public function __construct($db){
+ ///// kada "pokrenemo" new Admins ova funkcija se prva okida
+ public function __construct($db,$admin,$password){
     $this->pdo = $db;
-    // $this->admin = $admin;
-    // $this->password = $password;
+    $this->admin = $admin;
+    $this->password = $password;
  }
+
+ ///// funkcija kojom proveravamo da li u bazi imamo datog admina sa datom sifrom
  public function check(){
  $query = "SELECT * FROM admins WHERE admin=? AND password=?";
 
@@ -19,7 +23,8 @@ class Admins{
  $stmt->bindParam(2,$this->password); 
  
  $stmt->execute();
-
+  
+ //// uzimamo rezultate querija i to u formi assoc areja, ukoliko query ne prodje sve kolone ce imati vrednost null
  $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 

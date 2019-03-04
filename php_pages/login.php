@@ -6,32 +6,16 @@ include("../models/Admins.php");
 
 $init = new Database();
 $pdo = $init->connect();
-$admins = new Admins($pdo);
 
-$admins->admin = $_POST["admin"];
-$admins->password = $_POST["password"];
+///// kupimo podatke iz forme preko js i formdata konstruktor function
+$admin = $_POST["admin"];
+$password = $_POST["password"];
 
+////// pravimo istancu admins klase
+$admins = new Admins($pdo,$admin,$password);
 
-
+/// testiramo da vidimo da li postoji takav admin u nasoj bazi
 $admins->check();
 
-
-/////// testitamo da vidimo da li postoji takav admin u db
-
-// if ($_POST["admin"] !="" && $_POST["password"] !="") {
-   
-   
-
-//    $admin = $_POST["admin"];
-//    $password = $_POST["password"];
-
-  
-
-   
-    
-
-// } else{
-//     echo "jbg" ;
-// }
 
 ?>
