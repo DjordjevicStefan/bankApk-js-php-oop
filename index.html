@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bank App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="jumbotron text-center">
+    <h3 class="display-5">Bank App JS-PHP</h3>
+      <div class="select">
+    <button id="showAccount" class="btn btn-primary">Accounts</button>
+    <button id="addAccount" class="btn btn-info">Add Account</button>
+    <button id="delete" class="btn btn-warning">Edit/Delete</button>
+      </div>
+  </div>
+  <div class="container-fluid">
+
+      <div class="row" id="login">
+          <div class="col-8 offset-2">
+              <h1 class="display-4">admin login</h1>
+              <input class="form-control admin" type="text"  placeholder="admin">
+              <input class="form-control pass" type="password"  placeholder="your password">
+              <button id="btnLog" class="btn btn-primary btn-lg form-control" >login</button>
+            </div>
+          </div>
+
+
+
+    <div class="row" id="mainRow">
+      <div class="col-8 offset-2">
+        <h3 class="display-5">Accounts</h3>
+        <div class="row">
+          <div class="col-10 offset-1">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Deposit</th>
+                  <th>Credit Card</th>
+                </tr>
+              </thead>
+              <tbody id="mainTb">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="editRow">
+      <div class="col-8 offset-2">
+        <h3 class="display-5">Edit/delete</h3>
+        <div class="row">
+          <div class="col-10 offset-1">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Deposit</th>
+                  <th>Credit Card</th>
+                  <th>edit</th>
+                  <th>delete</th>
+                </tr>
+              </thead>
+              <tbody id="editTb">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="formRow">
+      <div class="col-8 offset-2">
+        <h3 class="display-5">Add Account</h3>
+        <div class="row">
+          <div class="col-10 offset-1">
+            <input id="formId" type="text" placeholder="id" class="form-control"><br>
+            <input id="formName" type="text" placeholder="name" class="form-control"><br>
+            <input id="formDeposit" type="text" placeholder="deposit" class="form-control"><br>
+            <input id="formCCard" type="text" placeholder="credit card" class="form-control"><br>
+            <button id="submit" class="btn btn-primary form-control">ADD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="editFormRow">
+      <div class="col-8 offset-2">
+        <h3 class="display-5">Add Account</h3>
+        <div class="row">
+          <div class="col-10 offset-1">
+            <input id="editFormId" type="text" placeholder="id" class="form-control"><br>
+            <input id="editFormName" type="text" placeholder="name" class="form-control"><br>
+            <input id="editFormDeposit" type="text" placeholder="deposit" class="form-control"><br>
+            <input id="editFormCCard" type="text" placeholder="credit card" class="form-control"><br>
+            <button id="editSubmit" class="btn btn-primary form-control">EDIT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="app.js" charset="utf-8"></script>
+<script src="main.js" charset="utf-8"></script>
+
+</body>
+</html>
+

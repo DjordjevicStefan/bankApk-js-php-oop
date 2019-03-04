@@ -1,0 +1,21 @@
+#formRow {
+    display: none;
+  }
+
+  #mainRow {
+    display: none;
+  }
+  
+  #editRow{
+    display: none;
+  }
+  
+  #editFormRow{
+    display: none ;
+  }
+
+  .select{
+    display: none ;
+
+  }
+  
