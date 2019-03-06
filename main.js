@@ -50,3 +50,9 @@ btnLog.onclick = function(){
    }
 
 }
+
+
+function showAll(){
+  
+
+}

@@ -4,6 +4,7 @@ class Admins{
  private $admin ;
  private $pdo;
  private $password ;
+ public $sesionId ;
  
 
  ///// kada "pokrenemo" new Admins ova funkcija se prva okida
@@ -26,6 +27,7 @@ class Admins{
   
  //// uzimamo rezultate querija i to u formi assoc areja, ukoliko query ne prodje sve kolone ce imati vrednost null
  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+ $this->sesionId = $result["id"] ;
 
 
  if ($result["admin"]== null) {
@@ -37,6 +39,8 @@ class Admins{
     }
 
  } 
+
+
 
 }
 
