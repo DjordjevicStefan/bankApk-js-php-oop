@@ -6,6 +6,10 @@
     display: none;
   }
   
+  #logOut {
+    display: none;
+  }
+
   #editRow{
     display: none;
   }

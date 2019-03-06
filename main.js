@@ -3,6 +3,7 @@ let pass = document.querySelector(".pass");
 let login = document.querySelector("#login");
 let select = document.querySelector(".select");
 let showAccounts = document.querySelector("#showAccount");
+let logOut = document.querySelector("#logOut");
 
 let btnLog = document.querySelector("#btnLog");
 
@@ -15,6 +16,38 @@ let mainTb = document.querySelector("#mainTb");
 // showAccounts.onclick = function(){
 //   showAll();
 // }
+
+
+////// proveravamo pri loadu stranice da li je admin vec logovan 
+window.addEventListener("load", function(){
+  let xml = new XMLHttpRequest();
+  xml.open("get", "php_pages/checkLogStatus.php");
+  xml.send();
+  
+  xml.onreadystatechange = function(){
+    if (xml.readyState == 4 && xml.status == 200) {
+     
+       
+      if (xml.responseText == "ok") {
+        login.style.display = "none" ;
+        mainRow.style.display = "block" ;
+        select.style.display = "block" ;
+        logOut.style.display = "block";
+        showAll();
+      } else {
+        login.style.display = "block" ;
+        mainRow.style.display = "none" ;
+        select.style.display = "none" ;
+
+      }
+   
+
+
+    } 
+  
+  
+  }
+});
 
 
 btnLog.onclick = function(){
@@ -41,6 +74,7 @@ btnLog.onclick = function(){
                 login.style.display = "none" ;
                 mainRow.style.display = "block" ;
                 select.style.display = "block" ;
+                logOut.style.display = "block" ;
                 showAll();
              } else if(xml.responseText == "try again") {
                  alert("nesto je krenulo po zlu,proverite sifru i korisnicko ime i pokusajte ponovo");
