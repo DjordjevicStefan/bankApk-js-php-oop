@@ -125,6 +125,10 @@ btnAdd.onclick = function(){
   if (clientAdd.value !="" && ccAdd.value !="" && depositAdd.value !="" ) {
     let fd = new FormData();
 
+    // let test1 = clientAdd.value;
+    // let test2 = depositAdd.value;
+    // let test3 = ccAdd.value ;
+
     fd.append("client", clientAdd.value);
     fd.append("deposit", depositAdd.value);
     fd.append("cc", ccAdd.value);
@@ -135,11 +139,13 @@ btnAdd.onclick = function(){
 
     xml.onreadystatechange = function(){
            if (xml.readyState == 4 && xml.status == 200) {
-              if (xml.responseText == "nope") {
+
+            if (JSON.parse(xml.responseText) == "nope") {
                 alert("doslo je do greske, pokusajte ponovo");
               } else{
                 mainRow.style.display = "block" ;
                 addAccountRow.style.display = "none" ;
+                mainTb.innerHTML = "";
                 showAll();
               }
 

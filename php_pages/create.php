@@ -16,17 +16,20 @@ $sesionId = $_SESSION["id"];
 /////// instanca User klase
 $users = new Users($pdo);
 
-///////iz post request uzmimamo varijable i dodajemo ih users objektu
-if (($_POST["client"] != "" )  && ($_POST["deposit"] != "" ) && ($_POST["cc"] != "" )  ) {
-   $users->client = $_POST["client"];
-   $users->deposit = $_POST["deposit"];
-   $users->cc = $_POST["cc"];
+///iz post request uzmimamo varijable i dodajemo ih users objektu
+$users->client = $_POST["client"];
+$users->deposit = $_POST["deposit"];
+$users->cc = $_POST["cc"];
 
+
+if (!empty($_POST["client"])  && isset($_POST["client"])  && !empty($_POST["deposit"]) && isset($_POST["deposit"]) && !empty($_POST["cc"]) &&  isset($_POST["cc"]) ) {
+    
    $users->create($sesionId);
+   echo json_encode("ok") ;
 
 } else {
     
-    echo "nope" ;
+    echo json_encode("nope") ;
 
 }
 
