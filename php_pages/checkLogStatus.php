@@ -1,8 +1,7 @@
 <?php
 session_start();
-// session_destroy();
 
-
+////// na load page proveravama da li sesija jos traje
 if ($_SESSION["id"] != "") {
     echo "ok";
 } else {
