@@ -31,4 +31,10 @@ class Users{
 
  } 
 
+public function create(){
+    $query = "INSERT INTO users SET client=?,deposit=?,cc=?,author=?" ;
+
+
+} 
+
 }

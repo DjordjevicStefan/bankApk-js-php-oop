@@ -3,6 +3,8 @@ let pass = document.querySelector(".pass");
 let login = document.querySelector("#login");
 let select = document.querySelector(".select");
 let showAccounts = document.querySelector("#showAccount");
+let addAccount = document.querySelector("#addAccount");
+let addAccountRow = document.querySelector("#formRow");
 let logOut = document.querySelector("#logOut");
 
 let btnLog = document.querySelector("#btnLog");
@@ -12,10 +14,15 @@ let mainRow = document.querySelector("#mainRow");
 let mainTb = document.querySelector("#mainTb");
 
 
+/////// sleketovanje dom elemenata potrebnih za opciju dodavanja user-a/klijenta
+  let clientAdd = document.querySelector("#clientAdd"); 
+  let depositAdd = document.querySelector("#depositAdd");  
+  let ccAdd = document.querySelector("#ccAdd");  
+  let btnAdd = document.querySelector("#btnAdd");           
 
-// showAccounts.onclick = function(){
-//   showAll();
-// }
+
+
+
 
 
 ////// proveravamo pri loadu stranice da li je admin vec logovan 
@@ -41,11 +48,7 @@ window.addEventListener("load", function(){
 
       }
    
-
-
     } 
-  
-  
   }
 });
 
@@ -93,7 +96,6 @@ btnLog.onclick = function(){
 
 }
 
-
 function showAll(){
   let xml = new XMLHttpRequest();
   xml.open("get", "php_pages/showAll.php");
@@ -118,3 +120,29 @@ function showAll(){
       }
   }
 }
+
+btnAdd.onclick = function(){
+  if (clientAdd.value !="" && ccAdd.value !="" && depositAdd.value !="" ) {
+     
+
+    
+  } else {
+    alert("popunite sva polja pa pritisnite dugme!!");
+    clientAdd.value = "" ;
+    ccAdd.value = "" ;
+    depositAdd.value = "" ;
+
+  }
+}
+
+showAccounts.onclick = function(){
+  login.style.display = "none" ;
+  mainRow.style.display = "block" ;
+  addAccountRow.style.display = "none" ;
+ }
+
+ addAccount.onclick = function(){
+  mainRow.style.display = "none" ;
+  login.style.display = "none" ;
+  addAccountRow.style.display = "block" ;
+ }
