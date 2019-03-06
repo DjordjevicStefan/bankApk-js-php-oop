@@ -21,6 +21,11 @@ let mainTb = document.querySelector("#mainTb");
   let btnAdd = document.querySelector("#btnAdd");           
 
 
+/////// selektovanje dom elemenata potrebnih za edit/delete
+ let showEditDelete = document.querySelector("#delete"); 
+ let editDelete = document.querySelector("#editRow");
+ let editTb = document.querySelector("#editTb"); 
+
 
 
 
@@ -51,6 +56,62 @@ window.addEventListener("load", function(){
     } 
   }
 });
+
+
+function showAll(){
+  let xml = new XMLHttpRequest();
+  xml.open("get", "php_pages/showAll.php");
+  xml.send();
+
+  xml.onreadystatechange = function(){
+      if (xml.readyState == 4 && xml.status == 200) {
+         let db = JSON.parse(xml.responseText);
+         let text = ""; 
+      
+         db.forEach(function(e) {
+           text = `<tr>
+             <td>${e.id}</td>
+             <td>${e.client}</td>
+             <td>${e.deposit}</td>
+             <td>${e.cc}</td>
+            </tr>`;
+
+            mainTb.innerHTML += text ;
+         });
+
+      }
+  }
+}
+
+
+function createEditTable(){
+  let xml = new XMLHttpRequest();
+  xml.open("get", "php_pages/showAll.php");
+  xml.send();
+
+  xml.onreadystatechange = function(){
+      if (xml.readyState == 4 && xml.status == 200) {
+         let db = JSON.parse(xml.responseText);
+         let text = ""; 
+      
+         db.forEach(function(e,index) {
+           text = `<tr>
+             <td>${e.id}</td>
+             <td>${e.client}</td>
+             <td>${e.deposit}</td>
+             <td>${e.cc}</td>
+             <td> <button data-index='${index}' class='editB btn btn-warning form-control '> edit  </button> </td>
+             <td> <button data-index='${index}' class='deleteB btn btn-danger form-control'> delete </button> </td>
+             </tr>`;
+            
+
+            editTb.innerHTML += text ;
+         });
+
+      }
+  }
+
+}
 
 
 btnLog.onclick = function(){
@@ -96,30 +157,7 @@ btnLog.onclick = function(){
 
 }
 
-function showAll(){
-  let xml = new XMLHttpRequest();
-  xml.open("get", "php_pages/showAll.php");
-  xml.send();
 
-  xml.onreadystatechange = function(){
-      if (xml.readyState == 4 && xml.status == 200) {
-         let db = JSON.parse(xml.responseText);
-         let text = ""; 
-      
-         db.forEach(function(e) {
-           text = `<tr>
-             <td>${e.id}</td>
-             <td>${e.client}</td>
-             <td>${e.deposit}</td>
-             <td>${e.cc}</td>
-            </tr>`;
-
-            mainTb.innerHTML += text ;
-         });
-
-      }
-  }
-}
 
 btnAdd.onclick = function(){
   if (clientAdd.value !="" && ccAdd.value !="" && depositAdd.value !="" ) {
@@ -168,10 +206,25 @@ showAccounts.onclick = function(){
   login.style.display = "none" ;
   mainRow.style.display = "block" ;
   addAccountRow.style.display = "none" ;
+  editDelete.style.display ="none";
  }
 
  addAccount.onclick = function(){
+  editDelete.style.display ="none"; 
   mainRow.style.display = "none" ;
   login.style.display = "none" ;
   addAccountRow.style.display = "block" ;
+  clientAdd.value = "" ;
+  ccAdd.value = "" ;
+  depositAdd.value = "" ;
+ }
+
+
+ showEditDelete.onclick = function(){
+    editDelete.style.display ="block";
+    addAccountRow.style.display = "none" ;
+    mainRow.style.display = "none" ;
+    createEditTable();
+
+
  }
