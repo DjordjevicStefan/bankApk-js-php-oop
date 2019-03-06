@@ -38,10 +38,25 @@ class Users{
  } 
 
 public function create($sesionId){
+    
     $query = "INSERT INTO users SET client=?,deposit=?,cc=?,created_by=?" ;
 
+    $stmt = $this->pdo->prepeare($query);
     
-    
+    ///// moze i ovako ali i kao arej sa var koji se stavlja kao parametar execute funkcije
+    $stmt.bintParam(1,$this->client);
+    $stmt.bintParam(2,$this->deposit);
+    $stmt.bintParam(3,$this->cc);
+    $stmt.bintParam(4,$sesionId);
+
+    $stmt->execute();
+
+    if ($stmt->execute()) {
+        return true ;
+      } else {
+        printf("Error", $stmt->error);
+        return false ;
+      }
 
 
 
