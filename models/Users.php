@@ -3,7 +3,8 @@
 class Users{
  
  private $pdo;
-
+ 
+ public $id;
  public $client ;
  public $deposit ;
  public $cc ;
@@ -33,9 +34,25 @@ class Users{
 
  //// saljemo nazad rezultate querija u json formatu 
  echo json_encode($result);
-    
+} 
 
- } 
+
+public function showOne($sesionId){
+    $query = "SELECT * FROM users WHERE created_by=? AND id=?";
+   
+    $stmt = $this->pdo->prepare($query);
+   
+    $stmt->bindParam(1,$sesionId); 
+    $stmt->bindParam(2,$this->id);
+    
+    $stmt->execute();
+     
+    //// uzimamo rezultate querija i to u formi assoc areja, ukoliko query ne prodje sve kolone ce imati vrednost null. ovde uzimamo jedan zato je bez All!!!
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+   
+    //// saljemo nazad rezultate querija u json formatu 
+    echo json_encode($result);
+   } 
 
 public function create($sesionId){
     

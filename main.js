@@ -6,28 +6,21 @@ let showAccounts = document.querySelector("#showAccount");
 let addAccount = document.querySelector("#addAccount");
 let addAccountRow = document.querySelector("#formRow");
 let logOut = document.querySelector("#logOut");
-
 let btnLog = document.querySelector("#btnLog");
-
 
 let mainRow = document.querySelector("#mainRow");
 let mainTb = document.querySelector("#mainTb");
 
-
 /////// sleketovanje dom elemenata potrebnih za opciju dodavanja user-a/klijenta
-  let clientAdd = document.querySelector("#clientAdd"); 
-  let depositAdd = document.querySelector("#depositAdd");  
-  let ccAdd = document.querySelector("#ccAdd");  
-  let btnAdd = document.querySelector("#btnAdd");           
-
+let clientAdd = document.querySelector("#clientAdd"); 
+let depositAdd = document.querySelector("#depositAdd");  
+let ccAdd = document.querySelector("#ccAdd");  
+let btnAdd = document.querySelector("#btnAdd");           
 
 /////// selektovanje dom elemenata potrebnih za edit/delete
- let showEditDelete = document.querySelector("#delete"); 
- let editDelete = document.querySelector("#editRow");
- let editTb = document.querySelector("#editTb"); 
-
-
-
+let showEditDelete = document.querySelector("#delete"); 
+let editDelete = document.querySelector("#editRow");
+let editTb = document.querySelector("#editTb"); 
 
 
 ////// proveravamo pri loadu stranice da li je admin vec logovan 
@@ -100,8 +93,8 @@ function createEditTable(){
              <td>${e.client}</td>
              <td>${e.deposit}</td>
              <td>${e.cc}</td>
-             <td> <button data-index='${index}' class='editB btn btn-warning form-control '> edit  </button> </td>
-             <td> <button data-index='${index}' class='deleteB btn btn-danger form-control'> delete </button> </td>
+             <td> <button id='${e.id}' class='editB btn btn-warning form-control '> edit  </button> </td>
+             <td> <button id='${e.id}' class='deleteB btn btn-danger form-control'> delete </button> </td>
              </tr>`;
             
 
@@ -226,5 +219,24 @@ showAccounts.onclick = function(){
     mainRow.style.display = "none" ;
     createEditTable();
 
+    function addListeners(){
+     editDelete.addEventListener("click", function(e){
+        // console.log(e.target.id);
+       let fd = new FormData();
+       fd.append("id", e.target.id);
+       
+
+       let xml = new XMLHttpRequest();
+       xml.open("post", "php_pages/showOne.php");
+       xml.send(fd);
+        
+
+     } );
+     
+
+    }
+  
+    addListeners();
+    
 
  }
