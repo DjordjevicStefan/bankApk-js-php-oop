@@ -3,6 +3,12 @@
 class Users{
  
  private $pdo;
+
+ public $client ;
+ public $deposit ;
+ public $cc ;
+
+
  
  
 
@@ -31,8 +37,12 @@ class Users{
 
  } 
 
-public function create(){
-    $query = "INSERT INTO users SET client=?,deposit=?,cc=?,author=?" ;
+public function create($sesionId){
+    $query = "INSERT INTO users SET client=?,deposit=?,cc=?,created_by=?" ;
+
+    
+    
+
 
 
 } 
