@@ -1,13 +1,20 @@
 let admin = document.querySelector(".admin");
 let pass = document.querySelector(".pass");
 let login = document.querySelector("#login");
+let select = document.querySelector(".select");
+let showAccounts = document.querySelector("#showAccount");
 
 let btnLog = document.querySelector("#btnLog");
 
 
 let mainRow = document.querySelector("#mainRow");
-let select = document.querySelector(".select");
+let mainTb = document.querySelector("#mainTb");
 
+
+
+// showAccounts.onclick = function(){
+//   showAll();
+// }
 
 
 btnLog.onclick = function(){
@@ -34,6 +41,7 @@ btnLog.onclick = function(){
                 login.style.display = "none" ;
                 mainRow.style.display = "block" ;
                 select.style.display = "block" ;
+                showAll();
              } else if(xml.responseText == "try again") {
                  alert("nesto je krenulo po zlu,proverite sifru i korisnicko ime i pokusajte ponovo");
                  admin.value = ""  ;
@@ -53,6 +61,26 @@ btnLog.onclick = function(){
 
 
 function showAll(){
-  
+  let xml = new XMLHttpRequest();
+  xml.open("get", "php_pages/showAll.php");
+  xml.send();
 
+  xml.onreadystatechange = function(){
+      if (xml.readyState == 4 && xml.status == 200) {
+         let db = JSON.parse(xml.responseText);
+         let text = ""; 
+      
+         db.forEach(function(e) {
+           text = `<tr>
+             <td>${e.id}</td>
+             <td>${e.client}</td>
+             <td>${e.deposit}</td>
+             <td>${e.cc}</td>
+            </tr>`;
+
+            mainTb.innerHTML += text ;
+         });
+
+      }
+  }
 }
