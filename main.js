@@ -5,6 +5,11 @@ let login = document.querySelector("#login");
 let btnLog = document.querySelector("#btnLog");
 
 
+let mainRow = document.querySelector("#mainRow");
+let select = document.querySelector(".select");
+
+
+
 btnLog.onclick = function(){
 
     
@@ -25,10 +30,10 @@ btnLog.onclick = function(){
 
             // console.log(JSON.parse(xml.responseText));
             // console.log(xml.responseText);
-            
-
-             if (xml.responseText == "ok") {
+            if (xml.responseText == "ok") {
                 login.style.display = "none" ;
+                mainRow.style.display = "block" ;
+                select.style.display = "block" ;
              } else if(xml.responseText == "try again") {
                  alert("nesto je krenulo po zlu,proverite sifru i korisnicko ime i pokusajte ponovo");
                  admin.value = ""  ;
