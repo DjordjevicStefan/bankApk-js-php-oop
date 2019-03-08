@@ -32,7 +32,7 @@ class Users{
  echo json_encode($result);
 } 
 
-
+///// pokazujemo samo usera/clienta koji nam je potreban sa datim id
 public function showOne($sesionId){
     $query = "SELECT * FROM users WHERE created_by=? AND id=?";
    
@@ -50,6 +50,8 @@ public function showOne($sesionId){
     echo json_encode($result);
    } 
 
+
+///// pravi novog usera/klijenta
 public function create($sesionId){
     
     $query = "INSERT INTO users SET client=?,deposit=?,cc=?,created_by=?" ;
@@ -67,6 +69,8 @@ public function create($sesionId){
 
 } 
 
+
+///////  updejtuje postojaceg klijenta
 public function update(){
   $query = "UPDATE users SET client=?,deposit=?,cc=? WHERE id=?";
    
@@ -83,4 +87,22 @@ public function update(){
 
 }
 
+
+////// brisanje iz baze klijenta na koga smo kliknuli
+public function deleteClient(){
+  $query = "DELETE FROM users WHERE id=?" ;
+
+  $stmt = $this->pdo->prepare($query);
+
+  $stmt->bindParam(1,$this->id);
+
+  if ($stmt->execute()) {
+    return true ;
+  } else {
+    printf("Error", $stmt->error);
+    return false ;
+  }
 }
+
+}
+

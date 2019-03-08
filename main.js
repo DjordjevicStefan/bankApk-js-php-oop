@@ -99,7 +99,7 @@ function createEditTable() {
              <td>${e.deposit}</td>
              <td>${e.cc}</td>
              <td> <button id='${e.id}' class='editB btn btn-warning form-control '> edit  </button> </td>
-             <td> <button id='${e.id}' class='deleteB btn btn-danger form-control'> delete </button> </td>
+             <td> <button  class='deleteB btn btn-danger form-control'> delete </button> </td>
              </tr>`;
 
 
@@ -222,11 +222,59 @@ showEditDelete.onclick = function () {
   editDelete.style.display = "block";
   addAccountRow.style.display = "none";
   mainRow.style.display = "none";
+  editTb.innerHTML = "";
   createEditTable();
 
-  function addListeners() {
-    editDelete.addEventListener("click", function (e) {
+function addListeners() {
+
+  editDelete.addEventListener("click", function (e) {
+
+      ///// funkcionalnost za delete dugme!!
+      ///////////// !!! na ovom primeru pogledaj kako se proverava da li je sve proslo dobro sa server strane !!!!!!!
+      if (e.target.className == "deleteB btn btn-danger form-control") {
+         
+         
+        let answer =   prompt("are you sure you want to delete this client? type yes if you are 100% sure");
+        
+        //// testiramo da li je polje popunjeno i da li u njemu stoji yes
+        if (answer == "yes" && answer != null ) {
+           let fd = new FormData();
+           let clientId = e.target.parentElement.previousElementSibling.firstElementChild.id ;
+
+           fd.append("id",clientId);
+
+           let xml = new XMLHttpRequest();
+           xml.open("post", "php_pages/delete.php");
+           xml.send(fd) ;
+
+           xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                 if (JSON.parse(xml.responseText== "nope")) {
+                   alert("doslo je do greske na server strani");
+                 } else {
+                  editTb.innerHTML = "";
+                  createEditTable();
+                 }
+      
+            }
+      
+          }
+
+          
+        } else {
+          alert("client isn't deleted!");
+        }
+        
+
+         
+         
+      }
+
+      
+      
+      ///// logika i funckionalnost za edit user/client
       if (e.target.id != "") {
+        
         //////// na klik edit dugmeta moramo da sklonimo sve ostale view a da prikazemo edit user view
         editDelete.style.display = "none";
         addAccountRow.style.display = "none";
@@ -286,8 +334,7 @@ showEditDelete.onclick = function () {
           }
 
         }
-      }
-
+      }  
 
 
     });
