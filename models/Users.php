@@ -67,7 +67,7 @@ public function create($sesionId){
 
 } 
 
-public function update($sesionId){
+public function update(){
   $query = "UPDATE users SET client=?,deposit=?,cc=? WHERE id=?";
    
   $stmt = $this->pdo->prepare($query);
@@ -76,7 +76,7 @@ public function update($sesionId){
   $stmt->bindParam(1,$this->client);
   $stmt->bindParam(2,$this->deposit);
   $stmt->bindParam(3,$this->cc);
-  $stmt->bindParam(4,$sesionId);
+  $stmt->bindParam(4,$this->id);
 
   $stmt->execute();
 

@@ -19,11 +19,12 @@ $users = new Users($pdo);
 $users->client = $_POST["client"];
 $users->deposit = $_POST["deposit"];
 $users->cc = $_POST["cc"];
+$users->id = $_POST["id"];
 
 
 if (!empty($_POST["client"])  && isset($_POST["client"])  && !empty($_POST["deposit"]) && isset($_POST["deposit"]) && !empty($_POST["cc"]) &&  isset($_POST["cc"]) ) {
     
-   $users->update($sesionId);
+   $users->update();
    echo json_encode("ok") ;
 
 } else {

@@ -248,6 +248,7 @@ showEditDelete.onclick = function () {
               editClient.value = user.client;
               editDeposit.value = user.deposit;
               editCC.value = user.cc;
+              let clientId = user.id ;
 
               submitEditBtn.onclick = function () {
                 let fd = new FormData();
@@ -255,6 +256,8 @@ showEditDelete.onclick = function () {
                 fd.append("client", editClient.value);
                 fd.append("deposit", editDeposit.value);
                 fd.append("cc", editCC.value);
+                fd.append("id", clientId);
+                
 
                 let xml = new XMLHttpRequest();
                 xml.open("post", "php_pages/edit.php");
