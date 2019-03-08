@@ -21,6 +21,11 @@ let btnAdd = document.querySelector("#btnAdd");
 let showEditDelete = document.querySelector("#delete"); 
 let editDelete = document.querySelector("#editRow");
 let editTb = document.querySelector("#editTb"); 
+let editForm = document.querySelector("#editFormRow");
+let submitEditBtn = document.querySelector("#editSubmit");
+let editClient = document.querySelector("#editFormName");
+let editDeposit = document.querySelector("#editFormDeposit");
+let editCC = document.querySelector("#editFormCCard");
 
 
 ////// proveravamo pri loadu stranice da li je admin vec logovan 
@@ -221,21 +226,48 @@ showAccounts.onclick = function(){
 
     function addListeners(){
      editDelete.addEventListener("click", function(e){
-        // console.log(e.target.id);
-       let fd = new FormData();
-       fd.append("id", e.target.id);
-       
+        if (e.target.id != "") {
+           //////// na klik edit dugmeta moramo da sklonimo sve ostale view a da prikazemo edit user view
+           editDelete.style.display ="none";
+           addAccountRow.style.display = "none" ;
+           mainRow.style.display = "none" ;
+           editForm.style.display = "block" ;
+          
+          let fd = new FormData();
+          let id = e.target.id;
+          fd.append("id", id);
+          
+   
+          let xml = new XMLHttpRequest();
+          xml.open("post", "php_pages/showOne.php");
+          xml.send(fd);
+          xml.onreadystatechange = function(){
+           if (xml.readyState == 4 && xml.status == 200 ) {
+             let user = JSON.parse(xml.responseText);
+             editClient.value = user.client ;
+             editDeposit.value = user.deposit ;
+             editCC.value = user.cc ;
 
-       let xml = new XMLHttpRequest();
-       xml.open("post", "php_pages/showOne.php");
-       xml.send(fd);
+
+           } else{
+              alert("doslo je do greske pri pristupanju bazi podataka, pokusajte ponovo");
+
+
+           }
+
+          }
+
+
+
+        }
+      
         
 
      } );
      
 
     }
-  
+    /////// dodajemo event listenere na ceo editDelete view
     addListeners();
     
 
