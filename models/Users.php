@@ -9,10 +9,6 @@ class Users{
  public $deposit ;
  public $cc ;
 
-
- 
- 
-
  ///// kada "pokrenemo" new Admins ova funkcija se prva okida
  public function __construct($db){
     $this->pdo = $db;
@@ -71,6 +67,20 @@ public function create($sesionId){
 
 } 
 
+public function update($sesionId){
+  $query = "UPDATE users SET client=?,deposit=?,cc=? WHERE id=?";
+   
+  $stmt = $this->pdo->prepare($query);
 
+  ///// moze i ovako ali i kao arej sa var koji se stavlja kao parametar execute funkcije
+  $stmt->bindParam(1,$this->client);
+  $stmt->bindParam(2,$this->deposit);
+  $stmt->bindParam(3,$this->cc);
+  $stmt->bindParam(4,$sesionId);
+
+  $stmt->execute();
+
+
+}
 
 }
