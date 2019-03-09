@@ -98,7 +98,7 @@ function createEditTable() {
              <td>${e.client}</td>
              <td>${e.deposit}</td>
              <td>${e.cc}</td>
-             <td> <button id='${e.id}' class='editB btn btn-warning form-control '> edit  </button> </td>
+             <td> <button id='${e.id}' class='editB btn btn-warning form-control'> edit  </button> </td>
              <td> <button  class='deleteB btn btn-danger form-control'> delete </button> </td>
              </tr>`;
 
@@ -205,9 +205,12 @@ showAccounts.onclick = function () {
   mainRow.style.display = "block";
   addAccountRow.style.display = "none";
   editDelete.style.display = "none";
+  editForm.style.display = "none";
 }
 
 addAccount.onclick = function () {
+  
+  editForm.style.display = "none";
   editDelete.style.display = "none";
   mainRow.style.display = "none";
   login.style.display = "none";
@@ -234,7 +237,7 @@ function addListeners() {
       if (e.target.className == "deleteB btn btn-danger form-control") {
          
          
-        let answer =   prompt("are you sure you want to delete this client? type yes if you are 100% sure");
+        // let answer =   prompt("are you sure you want to delete this client? type yes if you are 100% sure");
         
         //// testiramo da li je polje popunjeno i da li u njemu stoji yes
         if (answer == "yes" && answer != null ) {
@@ -253,6 +256,7 @@ function addListeners() {
                    alert("doslo je do greske na server strani");
                  } else {
                   editTb.innerHTML = "";
+                  editDelete.style.display = "none";
                   createEditTable();
                  }
       
@@ -261,9 +265,10 @@ function addListeners() {
           }
 
           
-        } else {
-          alert("client isn't deleted!");
-        }
+        } 
+        // else {
+        //   alert("client isn't deleted!");
+        // }
         
 
          
@@ -272,10 +277,11 @@ function addListeners() {
 
       
       
+      
       ///// logika i funckionalnost za edit user/client
-      if (e.target.id != "") {
+      if (e.target.className == "editB btn btn-warning form-control") {
         
-        //////// na klik edit dugmeta moramo da sklonimo sve ostale view a da prikazemo edit user view
+        ////// na klik edit dugmeta moramo da sklonimo sve ostale view a da prikazemo edit user view
         editDelete.style.display = "none";
         addAccountRow.style.display = "none";
         mainRow.style.display = "none";
