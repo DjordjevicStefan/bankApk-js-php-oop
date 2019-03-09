@@ -206,6 +206,8 @@ showAccounts.onclick = function () {
   addAccountRow.style.display = "none";
   editDelete.style.display = "none";
   editForm.style.display = "none";
+  mainTb.innerHTML = "";
+  showAll();
 }
 
 addAccount.onclick = function () {
@@ -237,7 +239,7 @@ function addListeners() {
       if (e.target.className == "deleteB btn btn-danger form-control") {
          
          
-        // let answer =   prompt("are you sure you want to delete this client? type yes if you are 100% sure");
+        let answer = prompt("are you sure you want to delete this client? type yes if you are 100% sure");
         
         //// testiramo da li je polje popunjeno i da li u njemu stoji yes
         if (answer == "yes" && answer != null ) {
@@ -256,7 +258,8 @@ function addListeners() {
                    alert("doslo je do greske na server strani");
                  } else {
                   editTb.innerHTML = "";
-                  editDelete.style.display = "none";
+                  editDelete.style.display = "block";
+                  
                   createEditTable();
                  }
       
@@ -266,9 +269,9 @@ function addListeners() {
 
           
         } 
-        // else {
-        //   alert("client isn't deleted!");
-        // }
+        else if(answer != "yes" || answer == null ) {
+          alert("client isn't deleted!");
+        }
         
 
          
